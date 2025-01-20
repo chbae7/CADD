@@ -129,6 +129,7 @@ def download_pdb(pdb_ids2):
         else:
             print(f"Failed to download {id}.pdb, error: {response.status_code}")
 
+@st.cache_data
 def extract_form_validation_xml(pdb_ids):
     print("wwPDB validation 파일을 확인합니다.")
     results = list()
@@ -138,7 +139,7 @@ def extract_form_validation_xml(pdb_ids):
             # pdb_ids : 관심 Uniprot에 해당하는 pdb id가 담긴 list
             # validation report xml을 파싱해서 wwPDB 평가에 필요한 5개 항목을 반환함. 만약 값이 없으면 None으로 처리됨.            
             # """
-            progress_bar.progress(int((index + 1) / len(pdb_ids) * 90), text='Progression rate')
+            # progress_bar.progress(int((index + 1) / len(pdb_ids) * 90), text='Progression rate')
             id_ = id_.lower()            
             id_split = id_.split("_")
             id_ = id_split[0]
@@ -431,6 +432,7 @@ st.subheader('This application provides a feature that quickly summarizes protei
 
 if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_state):
     progress_bar = st.progress(0, text='Progression rate')
+    st.spinner('Now processing...')
     summary, summary2 = main_function(gene_symbols)
     gene_symbol = st.selectbox(
         "원하는 gene symbol에 대한 결과를 보입니다",
@@ -448,7 +450,8 @@ if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_s
     st.write(f'{gene_symbol}의 Structure info table')
     st.dataframe(summary2[gene_symbol][2], use_container_width=True)
 
-    progress_bar.progress(100, 'Done')#완료가 됐다는 느낌을 주기 위해
+    #progress_bar.progress(100, 'Done')#완료가 됐다는 느낌을 주기 위해
+    st.success('Processing done')
 
     ##### py3Dmol단락
     pdb_id_tmp = list(summary[gene_symbol][2].index)
