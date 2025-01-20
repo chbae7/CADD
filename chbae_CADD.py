@@ -449,4 +449,5 @@ if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_s
 
     progress_bar.progress(100, 'Done')#완료가 됐다는 느낌을 주기 위해
 
+    st.write("asfsaf")
     st.write(list(summary[gene_symbol][2].index)   
