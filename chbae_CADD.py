@@ -6,6 +6,10 @@ from xml.etree import ElementTree as ET
 from typing import List, Dict
 from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
+
+# PDB 그리기
+from stmol import *
+import py3Dmol
 import time
 
 #### 함수 단락
@@ -390,7 +394,7 @@ def main_function(gene_symbols):
 ##### Page layout setting
 ##############################
 st.set_page_config(
-    page_title="페이지 제목",
+    page_title="Protein Structure informatics",
     layout="wide"
 )   
 
@@ -416,7 +420,7 @@ with st.sidebar:
         if submitted:
             st.session_state["initialized"] = True
             st.session_state['gene_symbols'] = gene_symbols
-            st.write('섭밋됐습니다.')
+            st.write('Submitted.')
 
 
 ##### 메인 단락
@@ -441,7 +445,8 @@ if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_s
     st.write('Index is represented as "PDB ID_Entity ID"')
     st.dataframe(summary[gene_symbol][2], use_container_width=True)
     st.write(f'{gene_symbol}의 Structure info table')
-    
     st.dataframe(summary2[gene_symbol][2], use_container_width=True)
 
-    progress_bar.progress(100, 'Done')#완료가 됐다는 느낌을 주기 위해 
+    progress_bar.progress(100, 'Done')#완료가 됐다는 느낌을 주기 위해
+
+    st.write(list(summary[gene_symbol][2].index)   
