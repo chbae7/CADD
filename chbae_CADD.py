@@ -436,7 +436,7 @@ if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_s
         "원하는 gene symbol에 대한 결과를 보입니다",
         (gene_symbols),
     )
-    st.write(f'Canonical protein sequence of {gene_symbol} (UniProt ID {summary[gene_symbol][0]}) is below:')
+    st.write(f'Canonical protein sequence of {gene_symbol} (UniProt ID {summary[gene_symbol][0]}) is below ({len(summary[gene_symbol][0])} amino acids):')
     canonical_sequence = summary[gene_symbol][1]
     canonical_sequence_display = ' '.join([canonical_sequence[i:i+5] for i in range(0, len(canonical_sequence), 5)])
     wrapped = '\n'.join([canonical_sequence_display[i:i+60] for i in range(0, len(canonical_sequence_display), 60)])
