@@ -301,6 +301,7 @@ def domain_extract_from_uniprot(uniprot_id, gene_symbol):
 
 #### 사이드바에서 입력받아 데이터 처리하는 메인 함수
 ##############################
+@st.cache_data
 def main_function(gene_symbols):
     df = get_reviewed_uniprot_ids_by_gene_symbols(gene_symbols)
     uniprot_id = df['UniProt ID'].tolist()
