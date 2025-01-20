@@ -431,7 +431,7 @@ st.title('Protein Structure Informatics')
 st.subheader('This application provides a feature that quickly summarizes protein structures using Gene symbols, UniProt, and PDB.')
 
 if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_state):
-    progress_bar = st.progress(0, text='Progression rate')
+    #progress_bar = st.progress(0, text='Progression rate')
     st.spinner('Now processing...')
     summary, summary2 = main_function(gene_symbols)
     gene_symbol = st.selectbox(
