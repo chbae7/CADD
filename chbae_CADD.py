@@ -449,5 +449,22 @@ if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_s
 
     progress_bar.progress(100, 'Done')#완료가 됐다는 느낌을 주기 위해
 
-    st.write("asfsaf")
-    st.write(list(summary[gene_symbol][2].index)   
+    ##### py3Dmol단락
+    pdb_id_tmp = list(summary[gene_symbol][2].index)
+    pdb_to_render = [item.split('_') for item in pdb_id_tmp]
+    pdb_to_render = [n[0] for n in pdb_to_render]
+    st.write(pdb_to_render)
+
+    pdb_display = st.selectbox(
+        "원하는 gene symbol에 대한 결과를 보입니다",
+        (pdb_to_render),
+        index=None,
+        placeholder="Please wait until PDB is loading."
+    )
+    
+    if pdb_display != None:
+        st.write('* 선택한 PDB ID :', pdb_display)
+        st.write('* 마우스 휠로 확대/축소 가능하고 드래그로 방향을 바꿀 수 있습니다.')
+        xyzview = py3Dmol.view(query='pdb:'+pdb_display) 
+        xyzview.setStyle({'cartoon':{'color':'spectrum'}})
+        showmol(xyzview, height =500, width=1000)
