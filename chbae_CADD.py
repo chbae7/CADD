@@ -14,6 +14,7 @@ import time
 
 #### 함수 단락
 ########################################
+@st.cache_data
 def get_reviewed_uniprot_ids_by_gene_symbols(gene_symbols):
     print("gene symbol을 통해 UniprotID를 반환합니다.")
     # """
@@ -53,7 +54,7 @@ def get_reviewed_uniprot_ids_by_gene_symbols(gene_symbols):
     df = pd.DataFrame(results)
     return df
 
-
+@st.cache_data
 def get_pdb_ids_from_uniprot_v2(uniprot_id):
     # print("UniprotID로 mutation 없고 wwPDB validation 결과를 반환합니다.")
     # """
@@ -128,7 +129,7 @@ def download_pdb(pdb_ids2):
         else:
             print(f"Failed to download {id}.pdb, error: {response.status_code}")
 
-
+@st.cache_data
 def extract_form_validation_xml(pdb_ids):
     print("wwPDB validation 파일을 확인합니다.")
     results = list()
@@ -301,7 +302,6 @@ def domain_extract_from_uniprot(uniprot_id, gene_symbol):
 
 #### 사이드바에서 입력받아 데이터 처리하는 메인 함수
 ##############################
-@st.cache_data
 def main_function(gene_symbols):
     df = get_reviewed_uniprot_ids_by_gene_symbols(gene_symbols)
     uniprot_id = df['UniProt ID'].tolist()
