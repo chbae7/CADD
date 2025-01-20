@@ -129,7 +129,6 @@ def download_pdb(pdb_ids2):
         else:
             print(f"Failed to download {id}.pdb, error: {response.status_code}")
 
-@st.cache_data
 def extract_form_validation_xml(pdb_ids):
     print("wwPDB validation 파일을 확인합니다.")
     results = list()
@@ -177,7 +176,7 @@ def extract_form_validation_xml(pdb_ids):
     except Exception as e:
         print(f'에러 발생: {str(e)}')
 
-
+@st.cache_data
 def extract_pdb_entity_seq(pdb_ids, uniprot_id):
     # """
     # pdb_ids: 6~7글자로 된 리스트. 함수 내에서 구분자로 쪼갠다음 url로 반환할 것임.
