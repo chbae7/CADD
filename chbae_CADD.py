@@ -405,6 +405,7 @@ if "initialized" not in st.session_state:
 ##### 사이드바
 ##############################
 with st.sidebar:
+    st.write('ch Bae')
     st.write("""
     탐색할 유전자심볼을 입력해주세요. 여러개를 입력할땐 줄 나눔을 해주세요.
     """)
@@ -425,8 +426,8 @@ with st.sidebar:
 
 ##### 메인 단락
 ########################################
-st.write('HELLO WORLD')
-st.write('RESULT')
+st.title('Protein Structure Informatics')
+st.subheader('This application provides a feature that quickly summarizes protein structures using Gene symbols, UniProt, and PDB.')
 
 if (st.session_state["initialized"] == True) and ('gene_symbols' in st.session_state):
     progress_bar = st.progress(0, text='Progression rate')
